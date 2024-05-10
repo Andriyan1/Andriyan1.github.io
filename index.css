@@ -1,0 +1,157 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+body {
+    overflow: hidden;
+}
+
+button {
+    border: none;
+    background: none;
+}
+
+button:active {
+    transform: translateY(1px);
+    /* Зсув кнопки вниз на 2px при натисканні */
+    box-shadow: none;
+    /* Відключення тіні під кнопкою при натисканні (необов'язково) */
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+    background-image: url(/img/fon.jpg);
+    max-width: 600px;
+    min-height: 100%;
+    width: 100%;
+}
+
+.header-box {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button-bay {
+    border: none;
+    background: none;
+    display: flex;
+    align-items: center;
+}
+
+.icon_ton {
+    width: 40px;
+    height: 40px;
+}
+
+.energi {
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 8px;
+}
+
+.icon-energy {
+    width: 50px;
+    height: 50px;
+    justify-content: center;
+}
+
+.energy-scale {
+    width: 75px;
+    height: 20px;
+    background-color: #04325ea8;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.energy-level {
+    background-color: #ffcc00;
+    border-radius: 10px;
+}
+
+
+/*footer*/
+
+.footer {
+    display: flex;
+    justify-content: center;
+}
+
+.footer-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-height: 70px;
+    width: 280px;
+}
+
+.icon-shop {
+    width: 70px;
+    height: 70px;
+}
+
+.icon-home {
+    width: 80px;
+    height: 80px;
+}
+
+.icon-info {
+    width: 68px;
+    height: 68px;
+}
+
+
+/*animacia
+/* Стилі кнопки */
+
+.animatedButton {
+    background-color: #db5e34;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.5s ease;
+    /* Анімація при наведенні */
+}
+
+
+/* Стилі кнопки натискання */
+
+.animatedButton:active {
+    transform: translateY(3px);
+    /* Зсув кнопки вниз на 2px при натисканні */
+    box-shadow: none;
+    /* Відключення тіні під кнопкою при натисканні (необов'язково) */
+}
+
+
+/* Анімація кнопки */
+
+.animatedButton.clicked {
+    animation: buttonClick 2s ease;
+    /* Виклик анімації при кліку */
+}
+
+
+/* Ключова фреймова анімація для кнопки */
+
+@keyframes buttonClick {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
