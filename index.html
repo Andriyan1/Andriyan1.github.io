@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="transfer.css">
+    <title>Document</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <header>
+            <div class="header-box">
+                <div class="button-ton-icon">
+                    <button class="button-bay" id="btnBuy">
+                        <img class="icon_ton" src="/img/toncoin-ICON.png" alt="#">
+                        <span class="span-counter">
+                            rfafa
+                        </span>
+                    </button>
+                </div>
+                <div class="energi">
+                    <img class="icon-energy" src="/img/energy-icon.png" alt="#">
+                    <div class="energy-scale">
+                        <div class="energy-level" style="width: 50%;"></div>
+                    </div>
+
+                </div>
+                <button id="connect-wallet-btn"></button>
+            </div>
+        </header>
+        <!-- <div class="fish-container">
+            <img class="fish" src="fish.png" alt="Fish">
+        </div> -->
+
+        <footer class="footer">
+
+            <div class="footer-box">
+                <button class="button-shop">
+                    <img class="icon-shop" src="/img/icon-shop.png" alt="#">
+                </button>
+                <button class="button-home">
+                    <img class="icon-home" id="home-main" src="/img/icon-home.png" alt="#">
+                </button>
+                <button class="button-info">
+                    <img class="icon-info" src="/img/icon-info.png" alt="#">
+                </button>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Модельне вікно  trancfer -->
+    <div id="myModalTransfer" class="modalTransfer">
+        <div class="modal-content-Transfer">
+            <span class="close-Transfer">&times;</span>
+            <div class="transfer-p-box">
+                <p class="transfer">Transfer</p>
+            </div>
+            <div class="button-container">
+                <div class="button2">
+                    <button class="centered-button2" id="BtnSend">Send</button>
+                </div>
+                <div class="button3">
+                    <button class="centered-button">Receive</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- модельне вікно поповнення  -->
+    <div class="modalReceiv">
+        <div class="modal-content-receiv">
+            <span class="close-Receiv">&larr;</span>
+            <div class="input-container">
+                <label for="input1" class="input-label">Transfer</label>
+                <div class="input-frame">
+                    <input type="text" id="input1" class="input-field" />
+                </div>
+                <button class="button-frame">Submit</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="index.js"></script>
+
+
+</body>
+
+</html>
