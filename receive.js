@@ -22,7 +22,7 @@ import TonConnectUI from '@tonconnect/ui';
 
 const tonConnectUI = new TonConnectUI({ //connect application
     manifestUrl: 'https://andriyan1.github.io/tonconnect-manifest.json',
-    buttonRootId: 'transfer'
+    buttonRootId: 'connect-wallet-btn'
 });
 
 const transaction = {
