@@ -18,18 +18,19 @@ function saveValue() {
     console.log("Введене значення: " + inputValue);
     // Далі ви можете використовувати значення змінної inputValue для ваших потреб
 }
-import TonConnectUI from '@tonconnect/ui';
 
-const tonConnectUI = new TonConnectUI({ //connect application
-    manifestUrl: 'https://andriyan1.github.io/tonconnect-manifest.json',
-    buttonRootId: 'connect-wallet-btn'
-});
 
-const transaction = {
-    messages: [{
-        address: "0:f3b69a1891acd2d653206e0af69e1f3430c2732b66368385c18d8fde4623d24d", // destination address
-        amount: "20000000" //Toncoin in nanotons
-    }]
+async function transaction() {
+    const transaction = {
+        validUntil: Math.round(Date.now() / 1000) + 10,
+        messages: [{
+            address: "0:222d62149fa9c401b45151731f1f1135304bea325cbbc7c3eb64e7806e5a4148", // destination address
+            amount: "20000000" //Toncoin in nanotons
+        }]
+    };
+    try {
+        await tonConnectUI.sendTransaction(transaction)
+    } catch (e) {
+        console.error(e);
+    }
 }
-
-const result = await tonConnectUI.sendTransaction(transaction)
