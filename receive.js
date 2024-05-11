@@ -21,16 +21,21 @@ function saveValue() {
 
 
 async function transaction() {
+    const recipientAddress = "0:222d62149fa9c401b45151731f1f1135304bea325cbbc7c3eb64e7806e5a4148"; // Адреса гаманця отримувача
+    const amountToSend = "10000000"; // Сума для відправлення в нанотонах
+
     const transaction = {
         validUntil: Math.round(Date.now() / 1000) + 10,
         messages: [{
-            address: "0:222d62149fa9c401b45151731f1f1135304bea325cbbc7c3eb64e7806e5a4148", // destination address
-            amount: "20000000" //Toncoin in nanotons
+            address: recipientAddress,
+            amount: amountToSend
         }]
     };
+
     try {
         await tonConnectUI.sendTransaction(transaction)
     } catch (e) {
         console.error(e);
     }
 }
+
