@@ -5,44 +5,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TON Keeper Payment</title>
-    <script>
-        function payWithTonKeeper() {
-            const address = "UQCJ1FTSnw98RPCGXYxGnSnmfSkjRkFJCqsVbNTQ8qyi5QrO";
-            const amount = 1000000000; // 1 TON в нанотонах
-            const text = "Оплата за товар";
-            const deeplink = `ton://transfer/${address}?amount=${amount}&text=${encodeURIComponent(text)}`;
-
-            // Спочатку спробуємо відкрити deeplink
-            try {
-                // Перевірка на можливість відкриття deeplink
-                window.location.href = deeplink;
-                
-                // Якщо deeplink не спрацює через затримку, пропонуємо альтернативу через 3 секунди
-                setTimeout(() => {
-                    alert("Не вдалося відкрити TON Keeper. Скопіюйте адресу для переказу вручну.");
-                    document.getElementById("address").textContent = address;
-                }, 3000);  // 3 секунди для переходу
-            } catch (e) {
-                alert("Сталася помилка при спробі відкрити TON Keeper.");
-            }
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
         }
-    </script>
+        .container {
+            text-align: center;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        button {
+            background-color: #0078FF;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #005bb5;
+        }
+    </style>
 </head>
 
 <body>
-    <h1>Оплата через TON Keeper</h1>
-    <p>Щоб здійснити оплату, натисніть кнопку нижче. Переконайтесь, що у вас встановлений TON Keeper.</p>
-
-    <button onclick="payWithTonKeeper()" style="padding: 10px 20px; font-size: 16px; background-color: #0078FF; color: white; border: none; border-radius: 5px; cursor: pointer;">
-        Оплатити через TON Keeper
-    </button>
-
-    <div id="manual-payment" style="margin-top: 20px;">
-        <p>Якщо TON Keeper не відкриється, скопіюйте наступну адресу для переказу:</p>
-        <p><strong id="address">Адреса для переказу: </strong></p>
+    <div class="container">
+        <h1>Оплата через TON Keeper</h1>
+        <!-- Кнопка для здійснення оплати -->
+        <button onclick="payWithTonKeeper()">Оплатити через TON Keeper</button>
     </div>
 
-    <p>Переконайтесь, що у вас встановлений TON Keeper для коректної роботи кнопки.</p>
+    <script>
+        function payWithTonKeeper() {
+            // Адреса для переказу
+            const address = "UQCJ1FTSnw98RPCGXYxGnSnmfSkjRkFJCqsVbNTQ8qyi5QrO";
+            // 1 TON в нанотонах
+            const amount = 1000000000;
+            // Опис платежу
+            const text = "Оплата за товар";
+
+            // Створення deeplink для TON Keeper
+            const deeplink = `ton://transfer/${address}?amount=${amount}&text=${encodeURIComponent(text)}`;
+
+            // Перехід за deeplink
+            window.location.href = deeplink;
+        }
+    </script>
 </body>
 
 </html>
