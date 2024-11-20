@@ -57,8 +57,22 @@
             // Створення deeplink для TON Keeper
             const deeplink = `ton://transfer/${address}?amount=${amount}&text=${encodeURIComponent(text)}`;
 
-            // Перехід за deeplink
-            window.location.href = deeplink;
+            // Спочатку пробуємо відкриття deeplink
+            const link = document.createElement('a');
+            link.href = deeplink;
+            link.target = "_blank";
+
+            // Перевірка на мобільний пристрій
+            if (navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
+                link.click();
+                // Додатково можна встановити таймер, щоб відкривати вручну, якщо не спрацьовує
+                setTimeout(function() {
+                    window.location.href = deeplink;  // Якщо deeplink не відкрився, робимо це вручну
+                }, 1000);
+            } else {
+                // Для десктопних браузерів
+                window.location.href = deeplink;
+            }
         }
     </script>
 </body>
