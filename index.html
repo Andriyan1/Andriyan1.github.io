@@ -10,25 +10,20 @@
             const address = "UQCJ1FTSnw98RPCGXYxGnSnmfSkjRkFJCqsVbNTQ8qyi5QrO";
             const amount = 1000000000; // 1 TON в нанотонах
             const text = "Оплата за товар";
-
             const deeplink = `ton://transfer/${address}?amount=${amount}&text=${encodeURIComponent(text)}`;
 
-            // Перевірка, чи підтримується deeplink перед спробою його відкрити
-            if (window.location.href.indexOf("ton://") === -1) {
-                window.location.href = deeplink;
-            }
-        }
-
-        function payWithTonKeeper() {
-            const address = "UQCJ1FTSnw98RPCGXYxGnSnmfSkjRkFJCqsVbNTQ8qyi5QrO";
-            const amount = 1000000000; // 1 TON в нанотонах
-            const text = "Оплата за товар";
-
-            const deeplink = `ton://transfer/${address}?amount=${amount}&text=${encodeURIComponent(text)}`;
+            // Спочатку спробуємо відкрити deeplink
             try {
+                // Перевірка на можливість відкриття deeplink
                 window.location.href = deeplink;
+                
+                // Якщо deeplink не спрацює через затримку, пропонуємо альтернативу через 3 секунди
+                setTimeout(() => {
+                    alert("Не вдалося відкрити TON Keeper. Скопіюйте адресу для переказу вручну.");
+                    document.getElementById("address").textContent = address;
+                }, 3000);  // 3 секунди для переходу
             } catch (e) {
-                alert("Схема 'ton://' не підтримується. Скопіюйте адресу та здійсніть переказ вручну: " + address);
+                alert("Сталася помилка при спробі відкрити TON Keeper.");
             }
         }
     </script>
@@ -36,10 +31,18 @@
 
 <body>
     <h1>Оплата через TON Keeper</h1>
+    <p>Щоб здійснити оплату, натисніть кнопку нижче. Переконайтесь, що у вас встановлений TON Keeper.</p>
+
     <button onclick="payWithTonKeeper()" style="padding: 10px 20px; font-size: 16px; background-color: #0078FF; color: white; border: none; border-radius: 5px; cursor: pointer;">
         Оплатити через TON Keeper
     </button>
-    <p>Переконайтесь, що у вас встановлений TON Keeper, інакше кнопка може не працювати.</p>
+
+    <div id="manual-payment" style="margin-top: 20px;">
+        <p>Якщо TON Keeper не відкриється, скопіюйте наступну адресу для переказу:</p>
+        <p><strong id="address">Адреса для переказу: </strong></p>
+    </div>
+
+    <p>Переконайтесь, що у вас встановлений TON Keeper для коректної роботи кнопки.</p>
 </body>
 
 </html>
