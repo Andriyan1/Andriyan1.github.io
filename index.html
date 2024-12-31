@@ -4,76 +4,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TON Keeper Payment</title>
+    <title>Search from Database</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f4f4f4;
+            margin: 20px;
         }
-        .container {
-            text-align: center;
-            padding: 20px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        
+        input[type="text"] {
+            padding: 10px;
+            width: 300px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
         }
-        button {
-            background-color: #0078FF;
-            color: white;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s;
+        
+        ul {
+            list-style-type: none;
+            padding: 0;
         }
-        button:hover {
-            background-color: #005bb5;
+        
+        li {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 5px;
+            background-color: #f9f9f9;
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <h1>Оплата через TON Keeper</h1>
-        <!-- Кнопка для здійснення оплати -->
-        <button onclick="payWithTonKeeper()">Оплатити через TON Keeper</button>
-    </div>
+    <h1>Search from Database</h1>
+    <input type="text" id="searchInput" placeholder="Type to search...">
+    <ul id="results"></ul>
 
     <script>
-        function payWithTonKeeper() {
-            // Адреса для переказу
-            const address = "UQCJ1FTSnw98RPCGXYxGnSnmfSkjRkFJCqsVbNTQ8qyi5QrO";
-            // 1 TON в нанотонах
-            const amount = 1000000000;
-            // Опис платежу
-            const text = "Оплата за товар";
+        const searchInput = document.getElementById('searchInput');
+        const resultsList = document.getElementById('results');
 
-            // Створення deeplink для TON Keeper
-            const deeplink = `ton://transfer/${address}?amount=${amount}&text=${encodeURIComponent(text)}`;
+        searchInput.addEventListener('input', () => {
+            const query = searchInput.value;
 
-            // Спочатку пробуємо відкриття deeplink
-            const link = document.createElement('a');
-            link.href = deeplink;
-            link.target = "_blank";
+            fetch(`http://localhost:3000/search?q=${query}`)
+                .then(response => response.json())
+                .then(data => {
+                    resultsList.innerHTML = '';
 
-            // Перевірка на мобільний пристрій
-            if (navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
-                link.click();
-                // Додатково можна встановити таймер, щоб відкривати вручну, якщо не спрацьовує
-                setTimeout(function() {
-                    window.location.href = deeplink;  // Якщо deeplink не відкрився, робимо це вручну
-                }, 1000);
-            } else {
-                // Для десктопних браузерів
-                window.location.href = deeplink;
-            }
-        }
+                    data.forEach(item => {
+                        const li = document.createElement('li');
+                        li.textContent = item.name;
+                        resultsList.appendChild(li);
+                    });
+                })
+                .catch(error => console.error('Error fetching data:', error));
+        });
     </script>
 </body>
 
